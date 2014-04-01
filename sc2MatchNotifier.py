@@ -15,11 +15,14 @@ Usage: sc2MatchNotifier {bnet profile url}
 """)
     exit(0)
 
+# Replace with your credentials
 gmail_sender = ''
 gmail_password = ''
 email_to = ''
 
 def get_games(url):
+    """Retrieves list of games from player's match history"""
+    
     import urllib
     import urllib2
     import re
@@ -46,6 +49,8 @@ def get_games(url):
     return games
 
 def send_mail(subject, message):
+    """Sends an email with specified subject and message"""
+    
     import smtplib
     
     msg = "\r\n".join([
@@ -64,6 +69,8 @@ def send_mail(subject, message):
     server.quit()
 
 def hash(obj):
+    """Returns a sha256 hash of an object"""
+    
     import hashlib
     import pickle
     
@@ -73,6 +80,8 @@ def hash(obj):
     return sha.hexdigest()
 
 def check_account(url):
+    """Checks a profile URL for changes and sends email if needed"""
+    
     slug = url.replace('http://', '').replace('/', '-')
     
     filename = "hash_" + slug + ".sha256"
